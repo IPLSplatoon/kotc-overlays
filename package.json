@@ -1,0 +1,32 @@
+{
+    "name": "kotc-overlays",
+    "version": "0.0.0",
+    "description": "Broadcast overlays for King of the Castle, a Splatoon tournament.",
+    "author": {
+        "name": "Inkling Performance Labs",
+        "url": "https://iplabs.ink"
+    },
+    "nodecg": {
+        "compatibleRange": "^1.7.0",
+        "graphics": [
+            {
+                "file": "main.html",
+                "width": 1920,
+                "height": 1080
+            },
+            {
+                "file": "break.html",
+                "width": 1920,
+                "height": 1080
+            }
+        ]
+    },
+    "dependencies": {
+        "fitted-text": "^1.0.1",
+        "gsap": "3.5.0",
+        "luxon": "^1.26.0"
+    },
+    "devDependencies": {
+        "ts-nodecg": "^0.3.1"
+    }
+}
