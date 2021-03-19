@@ -1,0 +1,153 @@
+.scene.teams-scene {
+    transform: translate(0, 1280px);
+    z-index: 4;
+}
+
+.scene.teams-scene > .teams-wrapper {
+    width: 1475px;
+    height: 750px;
+    display: grid;
+    grid-template-columns: 3fr 1.5fr 3fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
+    position: relative;
+    margin-bottom: 100px;
+}
+
+.teams-wrapper > .team {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.teams-wrapper > .versus {
+    width: 245px;
+    transform: scale(1.60) translate(4px, 0);
+    z-index: 5;
+}
+
+.team > .team-name {
+    position: absolute;
+    z-index: 6;
+    top: -25px;
+    display: flex;
+}
+
+.team-name > .text > img {
+    position: absolute;
+    z-index: -1;
+    width: 400px;
+}
+
+.team-name > .text {
+    width: 400px;
+    height: 200px;
+    margin-top: 45px;
+}
+
+.team-name > img {
+    position: absolute;
+    width: 175px;
+    z-index: 7;
+}
+
+.team-name > .text > div > fitted-text {
+    font-family: 'Montserrat', 'Kosugi', sans-serif;
+    font-weight: 800;
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
+.team-name > .text > div {
+    position: absolute;
+    width: 400px;
+    height: 200px;
+}
+
+.team > img.background {
+    width: 625px;
+    position: absolute;
+}
+
+.team > .players {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 8;
+    font-weight: 700;
+    font-size: 40px;
+}
+
+.team > .players > fitted-text {
+    height: 60px;
+}
+
+.team > .team-image {
+    width: 175px;
+    height: 175px;
+    background-size: cover;
+    background-position: center center;
+    border: 5px solid white;
+    border-radius: 50%;
+    z-index: 8;
+    opacity: 0;
+    position: absolute;
+    background-color: #222222;
+}
+
+#team-a-image {
+    left: -75px;
+    top: 100px;
+    transform: rotate(15deg);
+}
+
+#team-b-image {
+    top: 600px;
+    right: -105px;
+    transform: rotate(-10deg);
+}
+
+#team-a {
+    transform: rotate(-3deg);
+}
+
+#team-b {
+    transform: rotate(5deg);
+}
+
+#team-a > .team-name {
+    left: 85px;
+}
+
+#team-b > .team-name {
+    right: 75px;
+}
+
+#team-a > .players {
+    top: 190px;
+    right: 40px;
+}
+
+#team-b > .players {
+    top: 190px;
+    left: 70px;
+}
+
+#team-a > .team-name > .text {
+    transform: rotate(-2deg);
+}
+
+#team-b > .team-name > .text {
+    transform: rotate(1deg);
+}
+
+#team-a > .team-name > img {
+    left: 365px;
+}
+
+#team-b > .team-name > img {
+    right: 375px;
+    top: 55px;
+    transform: rotate(-10deg);
+}

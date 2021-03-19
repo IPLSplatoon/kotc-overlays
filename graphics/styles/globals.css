@@ -1,0 +1,15 @@
+body {
+    font-family: 'Texturina', 'Kosugi', sans-serif;
+    font-weight: 400;
+}
+
+.flex-align-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-font {
+    font-family: 'Texturina', 'Kosugi', sans-serif;
+    font-weight: 700;
+}

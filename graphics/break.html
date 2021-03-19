@@ -3,8 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <title>break@kotc-overlays</title>
+
+    <!--
+        Texturina 400, 700
+        Montserrat 600, 800
+        Kosugi
+        Font Awesome
+    -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Texturina:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6346e13f8b.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/break/break.css">
+    <link rel="stylesheet" href="styles/break/main.css">
+    <link rel="stylesheet" href="styles/break/teams.css">
+    <link rel="stylesheet" href="styles/break/stages.css">
+    <link rel="stylesheet" href="styles/break/infoBar.css">
 </head>
 <body>
+<div class="content-wrapper" id="content-wrapper">
+    <div class="scene main-scene">
+        <div class="content">
+            <img src="images/logo.svg" class="logo">
+            <div class="main-containers">
+                <div class="main-container">
+                    <fitted-text class="main-flavor-text" id="main-flavor-text" text="Welcome to King of the Castle!"
+                                 max-width="1800"></fitted-text>
+                    <div class="music-timer-wrapper flex-align-center">
+                        <div class="music">
+                            <fitted-text id="song-text" text="Music" max-width="1700"></fitted-text>
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="timer">
+                            <div id="timer-text">Next round starts in <span id="mins-remaining">??? minutes...</span>
+                            </div>
+                            <i class="far fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="background"></div>
+    </div>
 
+    <div class="bottom-gradient"></div>
+    <div class="bottom-background"></div>
+
+    <div class="scene teams-scene flex-align-center">
+        <div class="teams-wrapper">
+            <div class="team" id="team-a">
+                <div class="team-name">
+                    <div class="text">
+                        <div class="flex-align-center">
+                            <fitted-text id="team-a-name" text="Team A" max-width="380"
+                                         align="center"></fitted-text>
+                        </div>
+                        <img class="background" src="images/team-sticker.svg">
+                    </div>
+                    <img src="images/sticker-a.svg">
+                </div>
+                <div class="players" id="team-a-players">
+
+                </div>
+                <div class="team-image" id="team-a-image"></div>
+                <img class="background" src="images/team-paper-a.png">
+            </div>
+            <img class="versus" src="images/vs-text.svg">
+            <div class="team" id="team-b">
+                <div class="team-name">
+                    <img src="images/sticker-b.svg">
+                    <div class="text">
+                        <div class="flex-align-center">
+                            <fitted-text id="team-b-name" text="Team B" max-width="380"
+                                         align="center"></fitted-text>
+                        </div>
+                        <img class="background" src="images/team-sticker.svg">
+                    </div>
+                </div>
+                <div class="players" id="team-b-players">
+
+                </div>
+                <div class="team-image" id="team-b-image"></div>
+                <img class="background" src="images/team-paper-b.png">
+            </div>
+        </div>
+    </div>
+
+    <div class="scene stages-scene flex-align-center">
+        <div class="stages-scoreboard">
+            <fitted-text id="team-a-name-scoreboard" max-width="400" text=""></fitted-text>
+            <div class="scores">
+                <fitted-text id="team-a-score-scoreboard" max-width="50" text="0"></fitted-text>
+                <div></div>
+                <fitted-text id="team-b-score-scoreboard" max-width="50" text="0"></fitted-text>
+            </div>
+            <fitted-text id="team-b-name-scoreboard" max-width="400" text=""></fitted-text>
+        </div>
+        <div class="stages-grid" id="stages-grid">
+
+        </div>
+    </div>
+
+    <div class="info-bar-wrapper flex-align-center">
+        <img src="images/info-bar-bg.png">
+        <div class="info-bar flex-align-center">
+            <div class="info-row info-row-welcome flex-align-center">
+                Welcome to<span class="small-logo"><img src="images/swordfish-logo.svg"></span><span
+                    class="logo-font" style="margin-bottom: 8px">King of the Castle!</span>
+            </div>
+            <div class="info-row info-row-commentators flex-align-center">
+                <div class="commentators flex-align-center">
+                    <i class="fas fa-microphone-alt"></i>&nbsp;<fitted-text id="info-row-casters-text" useInnerHTML
+                                                                            text="Casters"
+                                                                            max-width="1050"></fitted-text>
+                </div>
+                <div class="commentators flex-align-center">
+                    <i class="fab fa-twitter"></i>&nbsp;<fitted-text id="info-row-casters-twitter-text" useInnerHTML
+                                                                     text="Casters" max-width="1050"></fitted-text>
+                </div>
+            </div>
+            <div class="info-row info-row-music flex-align-center">
+                <i class="fas fa-music" id="info-row-music-icon"></i>&nbsp;<fitted-text id="info-row-music-text"
+                                                                                        text="Music"
+                                                                                        max-width="1050"></fitted-text>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../node_modules/fitted-text/dist/fitted-text.js"></script>
+<script src="../node_modules/gsap/dist/gsap.js"></script>
+<script src="../node_modules/luxon/build/global/luxon.js"></script>
+
+<script src="scripts/globals.js"></script>
+<script src="scripts/replicants.js"></script>
+
+<script src="scripts/break/break.js"></script>
+<script src="scripts/break/sceneSwitcher.js"></script>
+<script src="scripts/break/nextStageTimer.js"></script>
+<script src="scripts/break/music.js"></script>
+<script src="scripts/break/mainFlavorText.js"></script>
+<script src="scripts/break/teams.js"></script>
+<script src="scripts/break/infoBar.js"></script>
+<script src="scripts/break/casters.js"></script>
+<script src="scripts/break/stages.js"></script>
 </body>
 </html>

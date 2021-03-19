@@ -1,0 +1,84 @@
+.scene.main-scene {
+    width: 3840px;
+}
+
+.scene.main-scene > .background {
+    width: inherit;
+    height: 1280px;
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 1;
+    background-image: url("../../images/break-top-castle.png");
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    filter: blur(8px);
+}
+
+.scene.main-scene > .content {
+    position: absolute;
+    z-index: 3;
+    width: 1920px;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    transform: translate(870px, 0);
+    color: white;
+}
+
+.scene.main-scene > .content > img.logo {
+    width: 1000px;
+}
+
+.scene.main-scene > .content > .main-containers {
+    height: 300px;
+    position: relative;
+}
+
+.scene.main-scene > .content > .main-containers > .main-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    top: 0; right: 0;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+fitted-text.main-flavor-text {
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.music-timer-wrapper {
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.music-timer-wrapper > .music,
+.music-timer-wrapper > .timer {
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+
+.music-timer-wrapper > .music > i,
+.music-timer-wrapper > .timer > i {
+    margin: 0 15px;
+    font-size: 50px;
+    text-align: center;
+    width: 50px;
+}
+
+.music-timer-wrapper > .music > fitted-text,
+.music-timer-wrapper > .timer > div {
+    font-size: 48px;
+}
+
+#mins-remaining {
+    font-weight: 700;
+}
+
