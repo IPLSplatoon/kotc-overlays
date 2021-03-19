@@ -38,6 +38,7 @@
 }
 
 .scene.main-scene > .content > .main-containers > .main-container {
+    width: 1800px;
     position: absolute;
     display: flex;
     flex-direction: column;
