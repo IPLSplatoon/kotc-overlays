@@ -55,7 +55,7 @@
 }
 
 .info-row-commentators > .commentators span.pronoun {
-	background-color: #FB7B08;
+	background-color: var(--accent-2);
 	color: white;
 	padding: 1px 5px;
 	border-radius: 5px;

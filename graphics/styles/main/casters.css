@@ -5,11 +5,11 @@
 }
 
 .casters-wrapper > .casters {
-    background-color: rgba(228, 228, 228, 0.8);
+    background-color: var(--main-background-color);
     text-align: center;
     font-size: 30px;
     border-radius: 12px;
-    color: black;
+    color: var(--main-text-color);
     width: 300px;
     padding: 1px 0;
 }
@@ -18,7 +18,7 @@
     font-weight: 600;
     padding: 5px 10px;
     border-radius: 12px 12px 0 0;
-    background-color: #6C3B8F;
+    background-color: var(--accent-1);
     color: white;
 }
 
@@ -40,7 +40,7 @@
 
 span.pronoun {
     font-size: 20px;
-    background-color: #FB7B08;
+    background-color: var(--accent-2);
     color: white;
     padding: 2px 5px;
     border-radius: 5px;

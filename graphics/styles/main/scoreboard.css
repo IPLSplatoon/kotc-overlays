@@ -2,11 +2,11 @@
     position: absolute;
     top: 50px;
     left: 50px;
-    color: black;
+    color: var(--main-text-color);
 }
 
 .scoreboard-wrapper > .scoreboard {
-    background-color: rgba(228, 228, 228, 0.8);
+    background-color: var(--main-background-color);
     width: 300px;
     height: 100px;
     border-radius: 12px;
@@ -32,7 +32,7 @@
 
 .scoreboard > .team-color {
     height: 35px;
-    border: 2px solid black;
+    border: 2px solid var(--main-text-color);
     width: 25px;
     border-radius: 5px;
     margin-left: 2px;
@@ -41,7 +41,7 @@
 .scoreboard > .line {
     width: 290px;
     height: 4px;
-    background-color: black;
+    background-color: var(--main-text-color);
     position: absolute;
     left: 5px;
     top: 48px;
@@ -60,7 +60,7 @@
 .flavor-text {
     height: 40px;
     width: 300px;
-    background-color: rgba(228, 228, 228, 0.8);
+    background-color: var(--main-background-color);
     border-radius: 12px;
     margin-top: 10px;
     display: flex;
