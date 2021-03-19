@@ -130,7 +130,7 @@
 }
 
 .scene.stages-scene > .stages-scoreboard > .scores {
-    background-color: #FB7B08;
+    background-color: var(--accent-2);
     width: 100%;
     height: 100%;
     display: grid;
