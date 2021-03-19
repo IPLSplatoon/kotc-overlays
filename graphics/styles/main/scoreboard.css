@@ -1,0 +1,94 @@
+.scoreboard-wrapper {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    color: black;
+}
+
+.scoreboard-wrapper > .scoreboard {
+    background-color: rgba(228, 228, 228, 0.8);
+    width: 300px;
+    height: 100px;
+    border-radius: 12px;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 225px 40px 35px;
+    align-items: center;
+    row-gap: 4px;
+}
+
+.scoreboard > .team-name {
+    margin-left: 8px;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.scoreboard > .team-score {
+    font-size: 38px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.scoreboard > .team-color {
+    height: 35px;
+    border: 2px solid black;
+    width: 25px;
+    border-radius: 5px;
+    margin-left: 2px;
+}
+
+.scoreboard > .line {
+    width: 290px;
+    height: 4px;
+    background-color: black;
+    position: absolute;
+    left: 5px;
+    top: 48px;
+}
+
+#team-a-color {
+    background-color: #fff;
+    border-radius: 5px 12px 5px 5px;
+}
+
+#team-b-color {
+    background-color: #000;
+    border-radius: 5px 5px 12px 5px;
+}
+
+.flavor-text {
+    height: 40px;
+    width: 300px;
+    background-color: rgba(228, 228, 228, 0.8);
+    border-radius: 12px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.flavor-text > fitted-text {
+    margin-left: 8px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.scoreboard-decoration {
+    position: absolute;
+}
+
+.scoreboard-decoration.scoreboard-crown {
+    top: -20px;
+    right: -15px;
+    width: 55px;
+    transform: rotate(20deg);
+}
+
+img.placeholder {
+    width: 1920px;
+    height: 1080px;
+    z-index: -999;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
