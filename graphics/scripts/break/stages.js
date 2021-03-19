@@ -159,7 +159,7 @@ async function createStages(roundObject) {
             stagesWidth = 1500;
             stagesGap = 35;
             stageModeMaxWidth = 250;
-            stageNameFontSize = 38;
+            stageNameFontSize = 35;
             stageModeFontSize = 35;
             break;
         case 7:
