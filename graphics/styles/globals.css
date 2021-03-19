@@ -2,8 +2,8 @@
     --accent-1: #6C3B8F;
     --accent-2: #FB7B08;
 
-    --main-background-color: rgba(228, 228, 228, 0.8);
-    --main-text-color: black;
+    --main-background-color: rgba(34, 34, 34, 0.8);
+    --main-text-color: white;
 }
 
 body {
