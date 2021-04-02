@@ -1,5 +1,6 @@
 .scene.stages-scene {
-    transform: translate(1920px, 1280px);
+    left: 1920px;
+    top: 1280px;
     z-index: 4;
 }
 

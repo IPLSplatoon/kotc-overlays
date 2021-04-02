@@ -116,13 +116,17 @@ function updateScoreboardName(team, newName) {
         .add(gsap.to(teamNameElem, {opacity: 1, duration: 0.35}));
 }
 
-function updateStages(roundObject, oldRoundObject) {
+async function updateStages(roundObject, oldRoundObject) {
     for (let i = 0; i < roundObject.games.length; i++) {
         const game = roundObject.games[i];
         const oldGame = oldRoundObject.games[i];
 
         if (game.stage === oldGame.stage && game.mode === oldGame.mode) {
             continue;
+        }
+
+        if (game.stage !== oldGame.stage) {
+            await loadImagePromise(`images/stages/${mapNameToImagePath[game.stage]}`);
         }
 
         const stageElem = document.getElementById(`stage_${i}`);

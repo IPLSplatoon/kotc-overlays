@@ -35,7 +35,7 @@ activeBreakScene.on('change', (newValue, oldValue) => {
 });
 
 function setScenePosition(x, y, position = '-=0.0') {
-    sceneTl.add(gsap.to('#content-wrapper', {x: x, y: y, ease: 'power2.inOut', duration: 1}), position);
+    sceneTl.add(gsap.to('#content-wrapper', {x: x, y: y, ease: 'power2.inOut', duration: 1, force3D: false}), position);
 }
 
 function showInfoBar(posX = null) {

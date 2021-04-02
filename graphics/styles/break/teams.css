@@ -1,5 +1,6 @@
 .scene.teams-scene {
-    transform: translate(0, 1280px);
+    left: 0px;
+    top: 1280px;
     z-index: 4;
 }
 
