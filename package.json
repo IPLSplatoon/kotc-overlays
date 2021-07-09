@@ -1,6 +1,7 @@
 {
     "name": "kotc-overlays",
     "version": "0.0.0",
+    "compatibleDashboardVersion": "^2.0.0",
     "description": "Broadcast overlays for King of the Castle, a Splatoon tournament.",
     "author": {
         "name": "Inkling Performance Labs",
