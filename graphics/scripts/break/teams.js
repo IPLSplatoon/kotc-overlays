@@ -3,28 +3,26 @@ const teamsTls = {
 	'b': gsap.timeline()
 }
 
-NodeCG.waitForReplicants(nextTeams, teamImageShown).then(() => {
-	nextTeams.on('change', (newValue, oldValue) => {
-		if (!oldValue) {
-			setTeams(newValue.teamAInfo, 'a');
-			setTeams(newValue.teamBInfo, 'b');
-			return;
-		}
+activeRound.on('change', (newValue, oldValue) => {
+	doOnDifference(newValue, oldValue, 'teamA.id',
+		() => setTeams(newValue.teamA, 'a'));
+	doOnDifference(newValue, oldValue, 'teamB.id',
+		() => setTeams(newValue.teamB, 'b'));
 
-		if (newValue.teamAInfo.id !== oldValue.teamAInfo.id) {
-			setTeams(newValue.teamAInfo, 'a');
-		}
-
-		if (newValue.teamBInfo.id !== oldValue.teamBInfo.id) {
-			setTeams(newValue.teamBInfo, 'b');
-		}
-	});
-
-	teamImageShown.on('change', newValue => {
-		gsap.to('#team-a-image', {opacity: (newValue.teamA && !stringIsBlank(nextTeams.value.teamAInfo.logoUrl)) ? 1 : 0, duration: 0.35});
-		gsap.to('#team-b-image', {opacity: (newValue.teamB && !stringIsBlank(nextTeams.value.teamBInfo.logoUrl)) ? 1 : 0, duration: 0.35});
-	});
+	updateTeamImageHidden(newValue, oldValue, 'a');
+	updateTeamImageHidden(newValue, oldValue, 'b');
 });
+
+function updateTeamImageHidden(newValue, oldValue, team) {
+	const teamData = team === 'a' ? newValue.teamA : newValue.teamB;
+
+	if (!teamData.showLogo || _.isEmpty(teamData.logoUrl)) {
+		gsap.to(`#team-${team}-image`, {opacity: 0, duration: 0.35})
+	} else {
+		doOnNoDifference(newValue, oldValue, `team${team.toUpperCase()}.id`,
+			() => gsap.to(`#team-${team}-image`, {opacity: 1, duration: 0.35}));
+	}
+}
 
 function setTeams(data, team) {
 	const tl = teamsTls[team];
@@ -47,7 +45,7 @@ function setTeams(data, team) {
 			} else {
 				loadImage(data.logoUrl, () => {
 					teamImageElem.style.backgroundImage = `url("${data.logoUrl}")`;
-					if ((team === 'a' && teamImageShown.value.teamA === true) || (team === 'b' && teamImageShown.value.teamB === true)) {
+					if (data.showLogo) {
 						tl.add(gsap.to(teamImageElem, {opacity: 1, duration: 0.3}));
 					}
 				});

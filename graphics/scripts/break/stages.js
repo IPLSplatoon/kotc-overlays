@@ -41,68 +41,45 @@ const sbTls = {
     'b': gsap.timeline()
 };
 
-NodeCG.waitForReplicants(rounds, activeRound, gameWinners, scoreboardData, activeBreakScene).then(() => {
-    activeRound.on('change', newValue => {
-        const roundObject = rounds.value[newValue];
-        createStages(roundObject);
+NodeCG.waitForReplicants(activeRound, activeBreakScene).then(() => {
+    activeRound.on('change', (newValue, oldValue) => {
+         doOnDifference(newValue, oldValue, 'round.id', () => createStages(newValue));
+
+         doOnNoDifference(newValue, oldValue, 'round.id', () => {
+             newValue.games.forEach((game, index) => {
+                 doOnDifference(newValue, oldValue, `games[${index}].winner`,
+                     (newWinner, oldWinner) => setGameWinner(index, newWinner, oldWinner));
+             });
+
+             if (oldValue) {
+                 if (!stageGamesMatch(newValue, oldValue)) {
+                     updateStages(newValue, oldValue);
+                 }
+             }
+         });
+
+        doOnDifference(newValue, oldValue, 'teamA.name',
+            value => {
+                updateScoreboardName('a', value);
+                newValue.games.forEach((game, index) => {
+                    if (game.winner === 'alpha') {
+                        setWinnerName(index, value);
+                    }
+                });
+            });
+        doOnDifference(newValue, oldValue, 'teamB.name',
+            value => {
+                updateScoreboardName('b', value);
+                newValue.games.forEach((game, index) => {
+                    if (game.winner === 'bravo') {
+                        setWinnerName(index, value);
+                    }
+                });
+            });
+
+        document.getElementById('team-a-score-scoreboard').setAttribute('text', newValue.teamA.score);
+        document.getElementById('team-b-score-scoreboard').setAttribute('text', newValue.teamB.score);
     });
-
-    rounds.on('change', (newValue, oldValue) => {
-        const currentRound = newValue[activeRound.value];
-
-        if (oldValue) {
-            const oldRound = oldValue[activeRound.value];
-            if (!stageGamesMatch(currentRound, oldRound)) {
-                updateStages(currentRound, oldRound);
-            }
-        }
-    });
-
-    gameWinners.on('change', (newValue, oldValue) => {
-        if (!oldValue) {
-            for (let i = 0; i < newValue.length; i++) {
-                setGameWinner(i, newValue[i], 0);
-            }
-        } else {
-            for (let i = 0; i < newValue.length; i++) {
-                if (newValue[i] !== oldValue[i]) {
-                    setGameWinner(i, newValue[i], oldValue[i]);
-                }
-            }
-        }
-    });
-
-    scoreboardData.on('change', (newValue, oldValue) => {
-        for (let i = 0; i < gameWinners.value.length; i++) {
-            const elem = gameWinners.value[i];
-
-            if (elem === 1) {
-                if (oldValue && oldValue.teamAInfo.name === newValue.teamAInfo.name) continue;
-                setWinnerName(i, newValue.teamAInfo.name);
-            } else if (elem === 2) {
-                if (oldValue && oldValue.teamBInfo.name === newValue.teamBInfo.name) continue;
-                setWinnerName(i, newValue.teamBInfo.name);
-            }
-        }
-
-        if (!oldValue) {
-            updateScoreboardName('a', newValue.teamAInfo.name);
-            updateScoreboardName('b', newValue.teamBInfo.name);
-        } else {
-            if (oldValue.teamAInfo.name !== newValue.teamAInfo.name) {
-                updateScoreboardName('a', newValue.teamAInfo.name);
-            }
-
-            if (oldValue.teamBInfo.name !== newValue.teamBInfo.name) {
-                updateScoreboardName('b', newValue.teamBInfo.name);
-            }
-        }
-    });
-});
-
-teamScores.on('change', newValue => {
-    document.getElementById('team-a-score-scoreboard').setAttribute('text', newValue.teamA);
-    document.getElementById('team-b-score-scoreboard').setAttribute('text', newValue.teamB);
 });
 
 function updateScoreboardName(team, newName) {
@@ -115,6 +92,8 @@ function updateScoreboardName(team, newName) {
     }))
         .add(gsap.to(teamNameElem, {opacity: 1, duration: 0.35}));
 }
+
+let isFirstStageUpdate = true;
 
 async function updateStages(roundObject, oldRoundObject) {
     for (let i = 0; i < roundObject.games.length; i++) {
@@ -180,13 +159,13 @@ async function createStages(roundObject) {
     for (let i = 0; i < roundObject.games.length; i++) {
         const game = roundObject.games[i];
 
-        const winnerValue = gameWinners.value[i];
+        const winnerValue = game.winner;
         let winnerName = '';
 
-        if (winnerValue === 1) {
-            winnerName = scoreboardData.value.teamAInfo.name;
-        } else if (winnerValue === 2) {
-            winnerName = scoreboardData.value.teamBInfo.name;
+        if (winnerValue === 'alpha') {
+            winnerName = activeRound.value.teamA.name;
+        } else if (winnerValue === 'bravo') {
+            winnerName = activeRound.value.teamB.name;
         }
 
         stageImageUrls.push(`images/stages/${mapNameToImagePath[game.stage]}`);
@@ -202,7 +181,7 @@ async function createStages(roundObject) {
 						style="background-image: url('images/stages/${mapNameToImagePath[game.stage]}'); filter: saturate(1)">
 					</div>
 					<div class="stage-text">
-						<div class="stage-winner-wrapper flex-align-center" style="opacity: ${winnerValue === 0 ? 0 : 1}">
+						<div class="stage-winner-wrapper flex-align-center" style="opacity: ${winnerValue === 'none' ? 0 : 1}">
 							<div class="stage-winner" style="font-size: ${stageModeFontSize}px">${addDots(winnerName)}</div>
 						</div>
 						<div class="stage-info">
@@ -227,7 +206,7 @@ async function createStages(roundObject) {
 
     await Promise.all(imageLoads);
 
-    if (activeBreakScene.value === 'stages') {
+    if (activeBreakScene.value === 'stages' && !isFirstStageUpdate) {
         hideStageElems(stagesTl, () => {
             gsap.set(stagesElem, {
                 gridTemplateColumns: `repeat(${roundObject.games.length}, 1fr)`,
@@ -239,6 +218,7 @@ async function createStages(roundObject) {
             showStageElems(stagesTl);
         });
     } else {
+        isFirstStageUpdate = false;
         gsap.set(stagesElem, {
             gridTemplateColumns: `repeat(${roundObject.games.length}, 1fr)`,
             width: stagesWidth,
@@ -273,18 +253,18 @@ function setGameWinner(index, winner, oldWinner) {
 
     const tl = winnerTls[index];
 
-    const winnerOpacity = winner === 0 ? 0 : 1;
-    const winnerSaturation = winner === 0 ? 1 : 0.15;
+    const winnerOpacity = winner === 'none' ? 0 : 1;
+    const winnerSaturation = winner === 'none' ? 1 : 0.15;
     let winnerName;
 
-    if (winner === 1) {
-        winnerName = scoreboardData.value.teamAInfo.name;
-    } else if (winner === 2) {
-        winnerName = scoreboardData.value.teamBInfo.name;
+    if (winner === 'alpha') {
+        winnerName = activeRound.value.teamA.name;
+    } else if (winner === 'bravo') {
+        winnerName = activeRound.value.teamB.name;
     }
 
-    if (winner !== 0) {
-        if (oldWinner === 0) {
+    if (winner !== 'none') {
+        if (oldWinner === 'none') {
             winnerTextElem.innerText = winnerName;
         } else {
             setWinnerName(index, winnerName, winner);

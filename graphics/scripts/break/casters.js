@@ -15,7 +15,14 @@ casters.on('change', (newValue, oldValue) => {
 		if (oldValue) {
 			const oldElement = oldValue[item];
 
-			if (element.pronouns !== oldElement.pronouns) {
+			Object.keys(oldValue).forEach(item => {
+				if (!newValue[item]) {
+					updateTwitters = true;
+					updateNames = true;
+				}
+			});
+
+			if (!oldElement || element.pronouns !== oldElement.pronouns) {
 				updateNames = true;
 				updateTwitters = true;
 			} else {

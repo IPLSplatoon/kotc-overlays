@@ -33,3 +33,32 @@ function loadImagePromise(imageUrl) {
         });
     })
 }
+
+function doOnDifference(newValue, oldValue, path, callback) {
+    const newObject = _.get(newValue, path);
+    const oldObject = _.get(oldValue, path);
+
+    if (newObject != null && (oldObject == null || !_.isEqual(newObject, oldObject))) {
+        callback(newObject, oldObject);
+    }
+}
+
+function doOnOneOrMoreDifference(newValue, oldValue, paths, callback) {
+    const newPaths = _.at(newValue, paths);
+    const oldPaths = _.at(oldValue, paths);
+
+    const doesNotExist = value => value == null;
+
+    if (!newPaths.every(doesNotExist) && (oldPaths.every(doesNotExist) || !_.isEqual(newPaths, oldPaths))) {
+        callback(newPaths);
+    }
+}
+
+function doOnNoDifference(newValue, oldValue, path, callback) {
+    const newObject = _.get(newValue, path);
+    const oldObject = _.get(oldValue, path);
+
+    if (newObject != null && (oldObject == null || _.isEqual(newObject, oldObject))) {
+        callback(newObject);
+    }
+}
