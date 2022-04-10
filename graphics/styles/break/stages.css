@@ -9,7 +9,6 @@
 }
 
 .scene.stages-scene > .stages-grid {
-    width: 1700px;
     height: 580px;
 
     position: absolute;
@@ -17,10 +16,26 @@
 
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 35px;
 
     font-family: 'Montserrat', 'Kosugi', sans-serif;
+}
+
+.scene.stages-scene > .stages-grid.stage-count-3 {
+    width: 1200px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+}
+
+.scene.stages-scene > .stages-grid.stage-count-5 {
+    width: 1500px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 35px;
+}
+
+.scene.stages-scene > .stages-grid.stage-count-7 {
+    width: 1700px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
 }
 
 .scene.stages-scene > .stages-grid > .stage {

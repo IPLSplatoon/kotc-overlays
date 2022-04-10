@@ -8,7 +8,7 @@ casters.on('change', newValue => {
 
         elemHtml += `
 		<div class="caster">
-            <fitted-text class="name" useInnerHTML text="${element.name} <span class=&quot;pronoun&quot;>${element.pronouns}</span>" max-width="280"></fitted-text>
+            <fitted-text class="name" use-inner-html text="${element.name} <span class=&quot;pronoun&quot;>${element.pronouns}</span>" max-width="280"></fitted-text>
             <fitted-text class="twitter" text="${element.twitter}" max-width="280"></fitted-text>
         </div>`;
     });

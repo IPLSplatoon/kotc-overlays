@@ -41,17 +41,16 @@ function setTeams(data, team) {
 	const teamImageElem = document.getElementById(`team-${team}-image`);
 
 	tl.add(gsap.to(teamImageElem, {
-		opacity: 0, duration: 0.3, onComplete: () => {
+		opacity: 0, duration: 0.3, onComplete: async () => {
 			if (stringIsBlank(data.logoUrl)) {
 				teamImageElem.style.backgroundImage = 'unset';
 				teamImageElem.style.opacity = '0';
 			} else {
-				loadImage(data.logoUrl, () => {
-					teamImageElem.style.backgroundImage = `url("${data.logoUrl}")`;
-					if (data.showLogo) {
-						tl.add(gsap.to(teamImageElem, {opacity: 1, duration: 0.3}));
-					}
-				});
+				await loadImage(data.logoUrl);
+				teamImageElem.style.backgroundImage = `url("${data.logoUrl}")`;
+				if (data.showLogo) {
+					tl.add(gsap.to(teamImageElem, {opacity: 1, duration: 0.3}));
+				}
 			}
 		}
 	}), '-=0.6');
@@ -80,11 +79,14 @@ function stringIsBlank(str) {
 	return (str === '' || str === undefined || str === null);
 }
 
-function loadImage(imageUrl, callback) {
-	const imageLoaderElem = document.createElement("img");
-	imageLoaderElem.src = imageUrl;
+async function loadImage(imageUrl) {
+	return new Promise((resolve) => {
+		const imageLoaderElem = document.createElement('img');
+		imageLoaderElem.src = imageUrl;
 
-	imageLoaderElem.addEventListener('load', () => {
-		callback();
+		imageLoaderElem.addEventListener('load', () => {
+			resolve();
+		});
 	});
 }
+
