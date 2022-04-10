@@ -3,23 +3,15 @@ const songTextElem = document.getElementById('song-text');
 const infoBarMusicTl = gsap.timeline();
 const topBarMusicElem = document.getElementById('info-row-music-text');
 
-function checkStringEmptyOrUndef(string) {
+function isEmptyString(string) {
     string = String(string);
     return (string === 'undefined' || string === '');
 }
 
 function getSongName(rep) {
-    if (checkStringEmptyOrUndef(rep.artist) && checkStringEmptyOrUndef(rep.song)) {
-        return 'No song is playing.'
-    }
+    const songName = [rep.artist, rep.song].filter(item => !isEmptyString(item)).join(' - ');
 
-    if (checkStringEmptyOrUndef(rep.artist)) {
-        return rep.song;
-    } else if (checkStringEmptyOrUndef(rep.song)) {
-        return rep.artist;
-    }
-
-    return rep.artist + ' - ' + rep.song;
+    return isEmptyString(songName) ? 'No song is playing.' : songName;
 }
 
 nowPlaying.on('change', newValue => {
