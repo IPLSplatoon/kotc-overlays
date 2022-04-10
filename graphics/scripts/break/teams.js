@@ -3,27 +3,28 @@ const teamsTls = {
 	'b': gsap.timeline()
 }
 
-NodeCG.waitForReplicants(nextTeams, teamImageShown).then(() => {
-	nextTeams.on('change', (newValue, oldValue) => {
+NodeCG.waitForReplicants(activeRound).then(() => {
+	activeRound.on('change', (newValue, oldValue) => {
 		if (!oldValue) {
-			setTeams(newValue.teamAInfo, 'a');
-			setTeams(newValue.teamBInfo, 'b');
+			setTeams(newValue.teamA, 'a');
+			setTeams(newValue.teamB, 'b');
 			return;
 		}
 
-		if (newValue.teamAInfo.id !== oldValue.teamAInfo.id) {
-			setTeams(newValue.teamAInfo, 'a');
+		if (newValue.teamA.id !== oldValue.teamA.id) {
+			setTeams(newValue.teamA, 'a');
 		}
 
-		if (newValue.teamBInfo.id !== oldValue.teamBInfo.id) {
-			setTeams(newValue.teamBInfo, 'b');
+		if (newValue.teamB.id !== oldValue.teamB.id) {
+			setTeams(newValue.teamB, 'b');
 		}
 	});
 
-	teamImageShown.on('change', newValue => {
-		gsap.to('#team-a-image', {opacity: (newValue.teamA && !stringIsBlank(nextTeams.value.teamAInfo.logoUrl)) ? 1 : 0, duration: 0.35});
-		gsap.to('#team-b-image', {opacity: (newValue.teamB && !stringIsBlank(nextTeams.value.teamBInfo.logoUrl)) ? 1 : 0, duration: 0.35});
-	});
+	// todo: hiding team images does not function
+	// teamImageShown.on('change', newValue => {
+	// 	gsap.to('#team-a-image', {opacity: (newValue.teamA && !stringIsBlank(nextRound.value.teamAInfo.logoUrl)) ? 1 : 0, duration: 0.35});
+	// 	gsap.to('#team-b-image', {opacity: (newValue.teamB && !stringIsBlank(nextRound.value.teamBInfo.logoUrl)) ? 1 : 0, duration: 0.35});
+	// });
 });
 
 function setTeams(data, team) {
@@ -47,7 +48,7 @@ function setTeams(data, team) {
 			} else {
 				loadImage(data.logoUrl, () => {
 					teamImageElem.style.backgroundImage = `url("${data.logoUrl}")`;
-					if ((team === 'a' && teamImageShown.value.teamA === true) || (team === 'b' && teamImageShown.value.teamB === true)) {
+					if (data.showLogo) {
 						tl.add(gsap.to(teamImageElem, {opacity: 1, duration: 0.3}));
 					}
 				});
