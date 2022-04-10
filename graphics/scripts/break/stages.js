@@ -207,6 +207,8 @@ async function updateGames(games, winners) {
                 opacity: 1,
                 stagger: 0.1
             });
+        } else {
+            gsap.set(target, { opacity: 1 });
         }
     }
 
