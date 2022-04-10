@@ -21,7 +21,7 @@ const castersShowTl = gsap.timeline();
 nodecg.listenFor('mainShowCasters', DASHBOARD_BUNDLE_NAME, () => {
     castersShowTl.add(gsap.to('#casters-wrapper', {y: 0, duration: 0.5, ease: Power2.easeOut, force3D: false}));
     castersShowTl.add(gsap.to({}, {duration: 15}));
-    castersShowTl.add(gsap.to('#casters-wrapper', {y: 325, duration: 0.5, ease: Power2.easeIn, force3D: false}));
+    castersShowTl.add(gsap.to('#casters-wrapper', {y: 345, duration: 0.5, ease: Power2.easeIn, force3D: false}));
 });
 
-gsap.set('#casters-wrapper', {y: 325});
+gsap.set('#casters-wrapper', {y: 345});
