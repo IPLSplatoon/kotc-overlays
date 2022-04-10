@@ -4,7 +4,6 @@ const mainFlavorText = nodecg.Replicant('mainFlavorText', DASHBOARD_BUNDLE_NAME)
 const nowPlaying = nodecg.Replicant('nowPlaying', DASHBOARD_BUNDLE_NAME);
 const musicShown = nodecg.Replicant('musicShown', DASHBOARD_BUNDLE_NAME);
 const nextRoundTime = nodecg.Replicant('nextRoundStartTime', DASHBOARD_BUNDLE_NAME);
-const nextRoundStartTimeShown = nodecg.Replicant('nextRoundStartTimeShown', DASHBOARD_BUNDLE_NAME);
 const rounds = nodecg.Replicant('rounds', DASHBOARD_BUNDLE_NAME);
 const activeRound = nodecg.Replicant('activeRoundId', DASHBOARD_BUNDLE_NAME);
 const gameWinners = nodecg.Replicant('gameWinners', DASHBOARD_BUNDLE_NAME);
